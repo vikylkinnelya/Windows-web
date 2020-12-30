@@ -1,8 +1,15 @@
 const forms = () => {
 
     const form = document.querySelectorAll('form'),
-        input = document.querySelectorAll('input'); //чтобы потом очистить инпуты
+        input = document.querySelectorAll('input'), //чтобы потом очистить инпуты
+        phoneInp = document.querySelectorAll('input[name = "user_phone"');
 
+    phoneInp.forEach(el => {
+        el.addEventListener('input', () => {
+            el.value = el.value.replace(/\D/, ''); //не число превр в пустую строку
+        });
+    });
+    
     const message = {
         loading: 'Загрузка...',
         success: 'Спасибо! Скоро мы с Вами свяжемся.',
