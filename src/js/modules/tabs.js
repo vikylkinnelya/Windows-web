@@ -1,4 +1,4 @@
-const tabs = (headSelector, tabSelector, contentSelector, activeClass) => {
+const tabs = (headSelector, tabSelector, contentSelector, activeClass, display = 'block') => {
     //один обработчик события на общий блок
     //дальше шапка отслеживает куда именно
     //опр индекс кликнутого 
@@ -9,7 +9,7 @@ const tabs = (headSelector, tabSelector, contentSelector, activeClass) => {
         content = document.querySelectorAll(contentSelector);
 
     const showTabCont = (i = 0) => { //по умолчанию
-        content[i].style.display = 'block'; //показывает конкретный, кот передается из обработчика событий
+        content[i].style.display = display; //показывает конкретный, кот передается из обработчика событий
         tab[i].classList.add(activeClass); // подсвечивает активный таб
     };
 
@@ -26,12 +26,12 @@ const tabs = (headSelector, tabSelector, contentSelector, activeClass) => {
 
     header.addEventListener('click', (ev) => {
         const target = ev.target;
-
-        if (target.classList.contains(tabSelector.replace(/\./, '')) ||
-            target.parentNode.classList.contains(tabSelector.replace(/\./, ''))) { 
-                //если кликнули кудато кто внутри нужного эл
+        if (target &&
+            (target.classList.contains(tabSelector.replace(/\./, '')) ||
+                target.parentNode.classList.contains(tabSelector.replace(/\./, '')))) {
+            //если кликнули кудато кто внутри нужного эл
             tab.forEach((item, i) => {
-                if (target == item || target.parentNode == item) { 
+                if (target == item || target.parentNode == item) {
                     //если искомый равен перебираемому, запоминаем его индекс
                     hideTabCont();
                     showTabCont(i);

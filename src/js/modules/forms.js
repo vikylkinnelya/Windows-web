@@ -1,15 +1,12 @@
+import checkNumInp from './checkNumInp';
+
 const forms = () => {
 
     const form = document.querySelectorAll('form'),
-        input = document.querySelectorAll('input'), //чтобы потом очистить инпуты
-        phoneInp = document.querySelectorAll('input[name = "user_phone"');
+        input = document.querySelectorAll('input'); //чтобы потом очистить инпуты
 
-    phoneInp.forEach(el => {
-        el.addEventListener('input', () => {
-            el.value = el.value.replace(/\D/, ''); //не число превр в пустую строку
-        });
-    });
-    
+    checkNumInp('input[name = "user_phone"');
+       
     const message = {
         loading: 'Загрузка...',
         success: 'Спасибо! Скоро мы с Вами свяжемся.',
