@@ -1,6 +1,6 @@
 import checkNumInp from './checkNumInp';
 
-const forms = () => {
+const forms = (state) => {
 
     const form = document.querySelectorAll('form'),
         input = document.querySelectorAll('input'); //чтобы потом очистить инпуты
@@ -37,7 +37,11 @@ const forms = () => {
             item.appendChild(statusMessage); //добавляем оповещение в блок родительской формы
 
             const formData = new FormData(item); //собираем все данные из формы
-
+            if (item.getAttribute('data-calc') === 'end') { //если в форму калькулятора чтото передалось
+                for (let key in state) { //дополняем дата данными из обьекта стейт формы калькулятора,
+                    formData.append(key, state[key]);
+                }
+            }
             postData('assets/server.php', formData) // отпр запрос на сервер
                 .then(res => {
                     console.log(res);
