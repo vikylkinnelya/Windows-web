@@ -6,7 +6,7 @@ const forms = (state) => {
         input = document.querySelectorAll('input'); //чтобы потом очистить инпуты
 
     checkNumInp('input[name = "user_phone"');
-       
+
     const message = {
         loading: 'Загрузка...',
         success: 'Спасибо! Скоро мы с Вами свяжемся.',
@@ -53,10 +53,15 @@ const forms = (state) => {
                     setTimeout(() => {
                         statusMessage.remove();
                     }, 5000);
+                    setTimeout(() => { //закрыть модалку
+                        if (ev.path.splice(-6, 1)[0].classList.contains('popup_dialog')) { //если это модалка
+                            ev.path.splice(-5, 1)[0].style.display = 'none'; //закрывается модальное окно
+                            document.body.classList.remove('modal-open');
+                        }
+                    }, 3000);
                 });
         });
     });
-
 };
 
 export default forms;
